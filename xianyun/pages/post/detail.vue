@@ -8,13 +8,10 @@
         </el-breadcrumb>
 
         <!-- 正文组件 -->
-        <DetailContent :data="detailInfo"/>
+        <DetailContent :data="detailInfo" :id="id" />
 
         <!-- 评论组件 -->
-        <DetailComment />
-
-        <!-- 评论列表组件 -->
-        <DetailCommeentList />
+        <DetailComment :id="id"/>
 
       </el-col>
 
@@ -32,18 +29,19 @@
 <script>
 import DetailContent from '@/components/post/detailContent.vue'
 import DetailComment from '@/components/post/detailComment.vue'
-import DetailCommeentList from '@/components/post/detailCommeentList.vue'
 import DetailSidebar from '@/components/post/detailSidebar.vue'
 export default {
   data() {
     return {
       detailInfo: {},
+      id:""
     }
   },
 
   methods: {
     getData(){
       let { id } = this.$route.query
+      this.id = id
 
       // 获取文章数据
       this.$axios({
@@ -63,7 +61,6 @@ export default {
   components: {
     DetailContent,
     DetailComment,
-    DetailCommeentList,
     DetailSidebar
   },
 

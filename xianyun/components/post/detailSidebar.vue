@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div  class="rightInfo"  v-for="(item,index) in recommend.data" :key="index">
+        <div  class="rightInfo"  v-for="(item,index) in recommend" :key="index">
             <nuxt-link :to="`/posts/detail?id=${item.id}`">
             <el-row type="flex">
                 <el-col :span="8" class="leftBody"><img :src="item.images[0]" alt=""></el-col>
@@ -36,13 +36,16 @@ export default {
             url:"/posts/recommend",
         }).then(res => {
             // console.log(res);
-            this.recommend = res.data
-            console.log(this.recommend);
+            this.recommend = res.data.data
+            // console.log(this.recommend);
+            if(this.recommend.length > 5){
+                this.recommend.length = 5
+            }
         })
     },
     filters: {
         timeFormat(value){
-            return moment(value)
+            return moment(value).format("YYYY-MM-DD")
         }
     }
 }

@@ -16,16 +16,16 @@
                 <p>评论({{item.comments.length}})</p>
             </el-col>
             <el-col class="mouseHover">            
-              <i class="el-icon-star-off"></i>
-              <p>收藏</p>
+              <i class="el-icon-star-off" @click="handleStar"></i>
+              <p @click="handleStar">收藏</p>
             </el-col>
             <el-col class="mouseHover">            
               <i class="el-icon-share"></i>
               <p>分享</p>
             </el-col>
             <el-col class="mouseHover">            
-              <i class="el-icon-magic-stick"></i>
-              <p>点赞({{item.like?item.like:0}})</p>
+              <i class="el-icon-magic-stick" @click="handleLike"></i>
+              <p @click="handleLike">点赞({{item.like?item.like:0}})</p>
             </el-col>
           </el-row>
         </div>
@@ -46,14 +46,64 @@ export default {
       data:{
         type:Object,
         default:{}
+      },
+
+      id:{
+        type:String,
+        default:""
       }
     },
 
     filters: {
       dateFormat(value){
 
-        return moment(value)
+        return moment(value).format("YYYY-MM-DD")
       }
+    },
+
+    methods: {
+      handleStar(){
+        // console.log(this.id);
+        this.$axios({
+          url:'/posts/star',
+          params:{
+            id:this.id
+          },
+          headers:{
+            Authorization: `Bearer ${this.$store.state.user.userInfo.token}`
+          }
+        }).then(res=>{
+          // console.log(res);
+          if(res.data.message == "收藏成功"){
+            this.$message.success(res.data.message)
+          }else{
+            this.$message.warning(res.data.message)
+          }
+        })
+      },
+
+      handleLike(){
+        this.$axios({
+          url:'/posts/like',
+          params:{
+            id:this.id
+          },
+          headers:{
+            Authorization: `Bearer ${this.$store.state.user.userInfo.token}`
+          }
+        }).then(res=>{
+          // console.log(res);
+          if(res.data.message == "点赞成功"){
+            this.$message.success(res.data.message)
+          }else{
+            this.$message.warning(res.data.message)
+          }
+        })
+      }
+    },
+
+    mounted () {
+
     }
 }
 </script>

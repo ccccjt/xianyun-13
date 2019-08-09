@@ -1,17 +1,6 @@
 <template>
     <div class="comment-list">
-        <div class="listInfo">
 
-        </div>
-        <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="pageindex"
-        :page-sizes="[4, 6, 8, 10]"
-        :page-size="pagesize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total">
-        </el-pagination>
     </div>
 </template>
 
