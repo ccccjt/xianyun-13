@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="container"></div>
+    <div id="map"></div>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   mounted() {
     window.onLoad = function() {
-      var map = new AMap.Map("container", {
+      var map = new AMap.Map("map", {
         zoom: 11, //级别
         center: [118.8718107, 31.32846821], //中心点坐标
         viewMode: "3D" //使用3D视图
@@ -35,8 +35,8 @@ export default {
 </script>
 
 <style>
-#container {
-  width: 500px;
-  height: 500px;
+#map {
+  width: 650px;
+  height: 360px;
 }
 </style>

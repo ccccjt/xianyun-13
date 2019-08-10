@@ -47,4 +47,11 @@ a{
 em,i{
     font-style: normal;
 }
+
+  .el-icon-star-on {
+    font-size: 22px;
+  }
+  .el-table__row .cell {
+    cursor: pointer;
+  }
 </style>
