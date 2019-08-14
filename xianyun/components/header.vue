@@ -19,7 +19,7 @@
                 <!-- 登录注册 -->
                 <div v-if="!$store.state.user.userInfo.token">
                     <!-- <router-link to="/"></router-link>     -->
-                    <nuxt-link to="/user/login">登录注册</nuxt-link>    
+                    <nuxt-link to="/user/login">登录 / 注册</nuxt-link>    
                 </div>
                 <!-- 登录之后的布局 -->
                 <div v-else>

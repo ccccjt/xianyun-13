@@ -13,7 +13,7 @@
           <el-row type="flex">
             <el-col class="mouseHover">
                 <i class="el-icon-edit-outline"></i>
-                <p>评论({{item.comments.length}})</p>
+                <p>评论({{total}})</p>
             </el-col>
             <el-col class="mouseHover">            
               <i class="el-icon-star-off" @click="handleStar"></i>
@@ -25,7 +25,7 @@
             </el-col>
             <el-col class="mouseHover">            
               <i class="el-icon-magic-stick" @click="handleLike"></i>
-              <p @click="handleLike">点赞({{item.like?item.like:0}})</p>
+              <p @click="handleLike">点赞({{item.like|| 0}})</p>
             </el-col>
           </el-row>
         </div>
@@ -45,12 +45,19 @@ export default {
     props:{
       data:{
         type:Object,
-        default:{}
+        default:{
+          total:0
+        }
       },
 
       id:{
         type:String,
         default:""
+      },
+
+      total:{
+        type:Number,
+        default:0
       }
     },
 

@@ -8,10 +8,10 @@
         </el-breadcrumb>
 
         <!-- 正文组件 -->
-        <DetailContent :data="detailInfo" :id="id" />
+        <DetailContent :data="detailInfo" :id="id" :total="total"/>
 
         <!-- 评论组件 -->
-        <DetailComment :id="id"/>
+        <DetailComment :id="id" @sendTotal="getTotal" />
 
       </el-col>
 
@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       detailInfo: {},
-      id:""
+      id:"",
+      total:0
     }
   },
 
@@ -51,6 +52,9 @@ export default {
         // console.log(res.data);
         this.detailInfo = res.data;
       })
+    },
+    getTotal(value){
+      this.total = value
     }
   },
 

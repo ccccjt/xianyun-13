@@ -1,7 +1,7 @@
 <template>
     <div>
         <div  class="rightInfo"  v-for="(item,index) in recommend" :key="index">
-            <nuxt-link :to="`/posts/detail?id=${item.id}`">
+            <nuxt-link :to="`/post/detail?id=${item.id}`">
             <el-row type="flex">
                 <el-col :span="8" class="leftBody"><img :src="item.images[0]" alt=""></el-col>
                 <el-col :span="16" class="rightBody">
