@@ -2,6 +2,7 @@
   <div class="container">
     <el-row type="flex" justify="space-between">
       <!-- 左侧菜单栏 -->
+      <!-- 版心 -->
 
       <!-- 右侧内容 -->
       <div class="post-wrapper">
@@ -84,7 +85,7 @@ export default {
       }
 
       this.$axios({
-        url: "http://157.122.54.189:9095/posts",
+        url: "/posts",
         params
       }).then(res => {
         const { data, total } = res.data;
@@ -119,7 +120,7 @@ export default {
       const { api } = this.$store.state;
 
       this.$axios({
-        url: "http:127.0.0.1:1337/posts/cities"
+        url: "/posts/cities"
       }).then(res => {
         const { data } = res.data;
         this.cities = data;
@@ -300,5 +301,47 @@ export default {
       left: 0;
     }
   }
+}
+.menus-wrapper {
+    position: relative;
+    width: 260px;
+    z-index: 2;
+    display: block;
+ }
+
+.menus-body{
+   width: 260px;
+   height: 165px;
+   }
+
+.menu-item{
+  height: 40px;
+line-height: 40px;
+border: 1px solid #DDD;
+padding: 0px 20px;
+font-size: 14px;
+position: relative;
+&:hover{
+    color: orange
+}
+}
+.aside-recommend {
+    margin-top: 20px;
+    width: 260px;
+    height: 218px;
+}
+.aside-title{
+    font-weight: 400;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDD;
+    margin-bottom: 10px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+img {
+    width: 100%;
+    display: block;
 }
 </style>

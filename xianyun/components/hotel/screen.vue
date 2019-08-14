@@ -3,135 +3,98 @@
     <el-row class="block-col-2 screen01" type="flex">
       <el-col :span="8" class="elright" justify="center">
         <span class="demonstration price">价格</span>
-        <span class="demonstration">0-4000</span>
-        <el-slider v-model="value2"></el-slider>
+        <span class="demonstration">0-{{value2}}</span>
+        <el-slider v-model="value2" :format-tooltip="formatTooltip"></el-slider>
       </el-col>
       <el-col :span="4" class="elleft">
         <span class="demonstration">住宿等级</span>
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            不限
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-select v-model="hotellevel" multiple placeholder="不限" collapse-tags>
+          <el-option v-for="item in levels" :key="item.value" :label="item.name" :value="item.id"></el-option>
+        </el-select>
       </el-col>
       <el-col :span="4" class="elleft" justify="center">
         <span class="demonstration">住宿类型</span>
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            不限
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-select v-model="hoteltype" multiple placeholder="不限" collapse-tags>
+          <el-option v-for="item in types" :key="item.value" :label="item.name" :value="item.id"></el-option>
+        </el-select>
       </el-col>
       <el-col :span="4" class="elleft">
         <span class="demonstration">酒店设施</span>
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            不限
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-select v-model="hotelasset" multiple placeholder="不限" collapse-tags>
+          <el-option v-for="item in assets" :key="item.value" :label="item.name" :value="item.id"></el-option>
+        </el-select>
       </el-col>
       <el-col :span="4" class="elleft">
         <span class="demonstration">酒店品牌</span>
-        <el-dropdown>
-          <span class="el-dropdown-link">
-            不限
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown" class="dropdown" split-button="true">
-            <el-dropdown-item>黄金糕</el-dropdown-item>
-            <el-dropdown-item>狮子头</el-dropdown-item>
-            <el-dropdown-item>螺蛳粉</el-dropdown-item>
-            <el-dropdown-item>双皮奶</el-dropdown-item>
-            <el-dropdown-item>蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-select v-model="hotelbrand" multiple placeholder="不限" collapse-tags>
+          <el-option v-for="item in brands" :key="item.value" :label="item.name" :value="item.id"></el-option>
+        </el-select>
       </el-col>
     </el-row>
-    <el-row type="flex" class="row-bg" justify="space-between">
+    <el-row
+      type="flex"
+      class="row-bg"
+      justify="space-between"
+      v-for="(item,index) in hotelList"
+      :key="index"
+    >
       <el-col :span="8">
         <div class="grid-content bg-purple">
-          <nuxt-link to="#">
-            <img
-              src="http://qcloud.dpfile.com/pc/wQ2ejOSmhB4OoEq1LYPHp_2RhNciyW026YiQFr_EEZsQrI_ZB6abZPwgKDOmI03U3dWYFEM5hoslgWXTJDjSPA.jpg"
-              alt
-            />
+          <nuxt-link :to="`hotel/${item.id}.html`">
+            <img :src="`${item.photos}`" alt />
           </nuxt-link>
         </div>
       </el-col>
       <el-col :span="10">
         <div class="grid-content bg-purple-light">
           <h4 class="hotel-cn-name">
-            <nuxt-link to="#">好来阁商务宾馆</nuxt-link>
+            <nuxt-link :to="`hotel/${item.id}.html`">{{item.name}}</nuxt-link>
           </h4>
-          <span>hao lai ge shang wu hotel</span>
+          <span>{{item.alias}}</span>
           <span class="namecolor">
             <i class="iconfont iconhuangguan"></i>
             <i class="iconfont iconhuangguan"></i>
             <i class="iconfont iconhuangguan"></i>
           </span>
-          <span>经济型</span>
+          <span>{{item.hoteltype.name}}</span>
           <el-row type="flex" justify="space-between">
             <el-col>
-              <el-rate v-model="value1" :colors="colors" disabled></el-rate>
+              <el-rate :score-template="`{${item.stars}}`" :colors="colors" disabled></el-rate>
             </el-col>
             <el-col>
-              <span class="namecolor">3.5分</span>
+              <span class="namecolor">{{item.stars}}分</span>
             </el-col>
             <el-col>
-              <span class="namecolor">9</span>条评价
+              <span class="namecolor">{{item.all_remarks}}</span>条评价
             </el-col>
             <el-col>
-              <span class="namecolor">37</span>篇游记
+              <span class="namecolor">{{item.num_collected}}</span>篇游记
             </el-col>
           </el-row>
           <el-row class="location-row">
             <i class="iconfont iconlocation"></i>
-            <span>位于: 高淳县淳溪镇镇兴路118号(高淳县委党校对面)</span>
+            <span>位于: {{item.address}}</span>
           </el-row>
         </div>
       </el-col>
       <el-col :span="6">
         <div class="grid-content bg-purple">
-          <el-table show-header:false :data="tableData" style="width: 100%">
-            <el-table-column prop="date"></el-table-column>
-            <el-table-column v-for="(item,index) in tableData" :key="index">
-              <span class="namecolor">{{item.price}}</span>起
-              <i class="el-icon-arrow-right"></i>
+          <el-table show-header:false :data="item.products" style="width: 100%">
+            <el-table-column prop="name"></el-table-column>
+            <el-table-column prop="price">
+              <template slot-scope="scope">
+                <span class="namecolor">￥{{ scope.row.price }}</span>起
+                <i class="el-icon-arrow-right"></i>
+              </template>
             </el-table-column>
           </el-table>
         </div>
       </el-col>
     </el-row>
-    <el-row type="flex" justify="end"> 
-      <el-pagination
-      :current-page="pageIndex"
-      layout="total, prev, pager, next"
-      :total="total"
-    ></el-pagination>
+    <el-row type="flex" justify="end">
+      <el-pagination :current-page="pageIndex" layout="total, prev, pager, next" :total="total">
+
+      </el-pagination>
     </el-row>
   </div>
 </template>
@@ -140,26 +103,87 @@ export default {
   data() {
     return {
       value2: 0,
-      value1: 3.5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
-      tableData: [
-        {
-          date: "携程",
-          price: "￥ 159"
-        }
-      ],
-      total:100,
-      pageIndex:1
+      hotelList: [],
+      hoteltype: [],
+      hotellevel: [],
+      hotelasset: [],
+      hotelbrand: [],
+      levels: [], // 酒店等级
+      types: [], // 酒店类型
+      assets: [], // 酒店设施
+      brands: [], // 酒店品牌
+      total: 100,
+      pageIndex: 1,
+      pageSize:2,
     };
   },
   methods: {
     formatTooltip(val) {
-      return val / 100;
+      this.value2=val
+      return val / 0.025;
+    },
+    handleHotellevel(value) {
+      console.log(value);
+      this.hotellevel = this.levels[value - 1].name;
+    },
+    handleHoteltype(value) {
+      console.log(value);
+      this.hoteltype = this.types[value - 1].name;
+    },
+    handleHotelasset(value) {
+      console.log(value);
+      this.hotelasset = this.assets[value - 1].name;
+    },
+    handleHotelbrand(value) {
+      console.log(value);
+      this.hotelbrand = this.brands[value - 1].name;
     }
+  },
+  watch: {
+    "value2"(){
+      this.$axios({
+      url: "/hotels",
+      params: { city: 74 }
+    }).then(res => {
+      console.log(res);
+      this.total=res.data.data.length;
+      this.hotelList = res.data.data;
+    });
+    }
+  },
+  mounted() {
+    this.$axios({
+      url: "/hotels/options"
+    }).then(res => {
+      console.log(res);
+      this.assets = res.data.data.assets;
+      this.levels = res.data.data.levels;
+      this.types = res.data.data.types;
+      this.brands = res.data.data.brands;
+    });
+    this.$axios({
+      url: "/hotels",
+      params: { city: 74 }
+    }).then(res => {
+      console.log(res);
+      this.total=res.data.data.length;
+      this.hotelList = res.data.data;
+    });
+    this.$axios({
+      url:'/posts/comments?id=33'
+    }).then(res=>{
+      console.log(res);
+    })
   }
 };
 </script>
 <style lang='less' scoped>
+
+/deep/ .el-input__inner {
+  border: none;
+  padding: 0 30px 0 0;
+}
 .hotel-cn-name {
   font-weight: 400;
   font-size: x-large;
@@ -198,7 +222,7 @@ export default {
   margin: 10px;
 }
 .row-bg {
-  height: 214px;
+  height: 250px;
   padding: 10px 0;
   background-color: #fff;
 }

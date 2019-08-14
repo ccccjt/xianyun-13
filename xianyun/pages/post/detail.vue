@@ -1,6 +1,6 @@
 <template>
   <div id="detail">
-    <el-row>
+    <el-row type="flex">
       <el-col :span="17">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">旅游攻略</el-breadcrumb-item>

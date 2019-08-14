@@ -33,17 +33,17 @@ export default {
 <style>
 .screen {
   margin-top: 50px;
-  height: 80px;
+  
 }
 .w {
   width: 1000px;
   margin: 0 auto;
-  height: 1000px;
 }
 .title {
   width: 1000px;
   margin: 0 auto;
   padding-top: 20px;
 }
+
 </style>
 
